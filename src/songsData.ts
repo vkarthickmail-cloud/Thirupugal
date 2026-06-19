@@ -3,6 +3,7 @@ import { Song } from "./types";
 export const SONGS_DATA: Song[] = [
   {
     id: "kaithala",
+    category: "thiruppugazh",
     titleTa: "கைத்தல நிறைகனி (விநாயகர் துதி)",
     titleEn: "Kaithala Nirai Kani (Praise of Ganesha)",
     location: "Invocation / Common",
@@ -66,6 +67,7 @@ export const SONGS_DATA: Song[] = [
   },
   {
     id: "muthai-tharu",
+    category: "thiruppugazh",
     titleTa: "முத்தைத்தரு பத்தி (திருவண்ணாமலை)",
     titleEn: "Muthai Tharu Patthi (Tiruvannamalai)",
     location: "Tiruvannamalai",
@@ -129,6 +131,7 @@ export const SONGS_DATA: Song[] = [
   },
   {
     id: "apakara-nindhai",
+    category: "thiruppugazh",
     titleTa: "அபகார நிந்தை (திருச்செந்தூர்)",
     titleEn: "Apakara Nindhai (P plea for Deliverance)",
     location: "Tiruchendur",
@@ -168,6 +171,7 @@ export const SONGS_DATA: Song[] = [
   },
   {
     id: "eru-mayil",
+    category: "thiruppugazh",
     titleTa: "ஏறுமயிலேறி விளையாடு முகம் ஒன்று",
     titleEn: "Eru Mayileru Vilaiyadu (The Six Faces)",
     location: "Viralimalai",
@@ -198,54 +202,210 @@ export const SONGS_DATA: Song[] = [
       {
         tamil: "குன்றுருவ வேல்வாங்கி நின்றமுகம் ஒன்றே",
         transliteration: "kundruruva velvaangi nindra mugam ondre",
-        meaningTa: "கிரௌஞ்ச மலையைப் பிளக்கும்படி கூரிய வேலைச் செலுத்திய முகம் ஒன்று,",
-        meaningEn: "One face commands the sharp Vel to pierce right through the mountain Krauncha,"
+        meaningTa: "கிரௌஞ்ச மலை பிளந்துபோகும்படி வேலேந்தி நின்ற முகம் ஒன்று,",
+        meaningEn: "One face threw the divine Vel to split the Krauncha mountain."
       }
     ],
-    totalMeaningTa: "முருகப் பெருமானின் ஆறு திருமுகங்களும் முறையே: மயிலின் மேல் ஏறி விளையாடுகிறது, தந்தையாம் சிவபெருமானுக்கு உபதேசிக்கிறது, அடியார்களின் துயர் களைகிறது, மலையைப் பிளந்து வேல் விடுகிறது, தீய சூரனை அழிக்கிறது, வள்ளி நாயகியை மணம் புரிகிறது. இத்தகைய சிவசுப்பிரமணியனை நெஞ்சார வழிபடுகிறேன்.",
-    totalMeaningEn: "Lord Murugan's six divine faces perform beautiful cosmic deeds: one face rides the peacock in divine play, one face teaches the Pranava mantra to Lord Shiva, one face cures the suffering of devotees, one face flings the Vel to shatter the mountain of ignorance. I surrender to these six glorious forms."
+    totalMeaningTa: "மயிலின் மீது ஏறி விளையாடும் முகமும், சிவனுடன் ஞானமொழி பேசும் முகமும், அடியார்களின் வினை தீர்க்கும் முகமும், குன்றினைப் பிளக்க வேல் ஏந்திய முகமும் கொண்ட ஆறுமுகக் கடவுளே போற்றி.",
+    totalMeaningEn: "We praise the six magnificent faces of Lord Murugan: riding the peacock, teaching supreme wisdom to Father Shiva, clearing the karma of seekers, and throwing the Vel to pierce the mountain."
   },
   {
-    id: "bhakthiyal",
-    titleTa: "பக்தியால் யானுனை (பழனி மலை)",
-    titleEn: "Bhakthiyal Yanunai (Devotion - Pazhani)",
-    location: "Pazhani",
-    santham: "தத்தனா தனதனா தத்தனா தனதனா (Thathana Thanathana)",
-    introductionTa: "பழனி மலையில் வீற்றிருக்கும் தண்டாயுதபாணியை முழுமையான பக்தியோடு பாடித் துதிக்கும் உன்னத இன்னிசைப் பாசுரம்.",
-    introductionEn: "A high-vibrational devotional hymn composed at Pazhani temple, celebrating the beautiful form, dynamic posture, and immense grace of Lord Dhandayuthapani.",
-    youtubeId: "W7o-Z4q9fT8",
-    kaumaramUrl: "https://www.kaumaram.com/thiru/tpg0147_u.html",
+    id: "anubhuti-1",
+    category: "anuboothi",
+    titleTa: "நெஞ்சக் கனகல்லுருக (கந்தர் அனுபூதி காப்பு)",
+    titleEn: "Nenjak Kanakalluruga (Kandar Anubhuti 1)",
+    location: "Common / Invocational",
+    santham: "சந்தம் - கலித்துறை (Santham - Kalithurai)",
+    introductionTa: "அருணகிரிநாதர் அருளிய 'கந்தர் அனுபூதி' என்னும் தவ நூலின் முதல் பாடல். இது கல் நெஞ்சையும் உருக வைத்து முருகனின் திருவடியில் சேர்க்கும்.",
+    introductionEn: "The opening invocatory hymn of Kandar Anubhuti, the ultimate treatise on self-realization, structured to melt rigid minds into pure devotion.",
+    youtubeId: "V_9bE6AFr8s",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/anubhuti_u.html",
     lines: [
       {
-        tamil: "பக்தியால் யானுனைப் பலகாலும்",
-        transliteration: "bhakthiyaal yaanunaip palagaalum",
-        meaningTa: "உண்மையான பக்தியோடு நான் உன்னை எப்போதும் பல தருணங்களில்,",
-        meaningEn: "With pure, unswerving devotion to You at all times and seasons,"
+        tamil: "நெஞ்சக் கனகல்லுருக நெக்கு நெக்குற்று",
+        transliteration: "nenjak kanagalluruga nekku nekkutru",
+        meaningTa: "இரும்பு போலவும் கல் போலவும் கடினமாக இருக்கும் என்னுள் இருக்கும் நெஞ்சம் உருகவும்,",
+        meaningEn: "So that my hard, stone-like heart melts and overflows with soft tenderness,"
       },
       {
-        tamil: "பற்றியே மாமலர் கொடுதூவி",
-        transliteration: "patriyae maamalar koduthoovi",
-        meaningTa: "மன உறுதியுடன் பற்றிப் பிடித்து, நறுமணம் மிக்க சிறந்த மலர்களைத் தூவி,",
-        meaningEn: "clinging onto Your feet while showering fragrant, holy flowers,"
+        tamil: "அஞ்சக் கனிவாய் உருகும் அன்பு பெறவே",
+        transliteration: "anjak kanivaai urugum anbu peravae",
+        meaningTa: "பயங்கள் நீங்கி, கனிந்த உள்ளத்தோடு கண்ணீர் மல்கும் மெய்யன்பைப் பெற்றிடவும்,",
+        meaningEn: "and fears disappear while obtaining the sweet, weeping tears of intense love,"
       },
       {
-        tamil: "முத்தமிழால் உனைத் துதித்தேனே",
-        transliteration: "mutthamilaal unait thuthithaenae",
-        meaningTa: "இயல், இசை, நாடகமாகிய முத்தமிழ்ப் பாடல்களைக் கொண்டு போற்றித் துதித்தேனே!",
-        meaningEn: "adoring and singing Your praises through the divine three-fold Tamil literature!"
+        tamil: "நஞ்சக் கறைக்கண்டன் நவில்கரி மாமுகன்",
+        transliteration: "nanjak karaikkandan navilgari maamugan",
+        meaningTa: "நஞ்சை விழுங்கிய கறையணிந்த கண்டத்தையுடைய சிவபெருமானின் மூத்த மகனான கணபதிப் பெருமான்",
+        meaningEn: "the beloved elder brother of Murugan, the majestic elephant-headed Ganapati who serves Father Shiva,"
       },
       {
-        tamil: "முற்படவே அருள் புரிவாயே",
-        transliteration: "murpada-vae arul purivaayae",
-        meaningTa: "எனக்கு மற்ற எல்லாவற்றிற்கும் முன்பாக ஓடி வந்து உனது இன்னருளைத் தந்தருள்வாயாக.",
-        meaningEn: "Please run swiftly to extend your hand of shelter and absolute protection."
+        tamil: "பஞ்சக் கர ஆனைப் பதம் பணிவாமே",
+        transliteration: "panjak kara aanaip padham panivaamae",
+        meaningTa: "ஐந்து கரங்களை உடைய அந்த விநாயகப் பெருமானின் திருவடிகளைப் பணிவோம்.",
+        meaningEn: "before we proceed, we bow down and worship His five-handed lotus feet!"
       }
     ],
-    totalMeaningTa: "பழனியில் வீற்றிருக்கும் வள்ளல் முருகனை, மாமலர் தூவி, முத்தமிழால் பாடி உருகும் பக்தர்களுக்கு அவன் ஓடி வந்து முதலில் அருள்வான் என்பது இப்பாடலின் கருத்து.",
-    totalMeaningEn: "By praising the Lord of Pazhani Hill with beautiful garlands of music, the devotee is guaranteed direct immediate grace and shielding from past ancestral faults."
+    totalMeaningTa: "முருகனைப் பாடுவதற்கு முன்பாக, கல் நெஞ்சும் உருகும் அன்பைப் பெற்றிட, ஐந்து கரங்களையுடைய விநாயகரின் பொற்பாதங்களைத் தொழுகிறோம்.",
+    totalMeaningEn: "We praise Lord Ganapati first, so that our hardened egos melt into emotional spiritual awareness, qualifying us to receive the non-dual realization of Lord Skanda."
+  },
+  {
+    id: "anubhuti-2",
+    category: "anuboothi",
+    titleTa: "ஆடும் பரி வேல் அணி சேவல் (கந்தர் அனுபூதி 2)",
+    titleEn: "Aadum Pari Vel Ani Seval (Kandar Anubhuti 2)",
+    location: "Common",
+    santham: "சந்தம் - கலித்துறை (Santham - Kalithurai)",
+    introductionTa: "முருகப் பெருமானின் கம்பீரமான வேல், மயில், சேவல் ஆகியவற்றைத் தினந்தோறும் பாடித் தொழுவதையே தன் ஒரே கடமையாக வேண்டுவதைப் பாடும் திருப்பாடல்.",
+    introductionEn: "The second verse of Kandar Anubhuti, showcasing the absolute spiritual importance of celebrating Lord Murugan's mount, spear, and banner as a daily ritual of deep love.",
+    youtubeId: "V_9bE6AFr8s",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/anubhuti_u.html",
+    lines: [
+      {
+        tamil: "ஆடும் பரி வேல் அணி சேவல் எனப்",
+        transliteration: "aadum pari vel ani seval enap",
+        meaningTa: "ஆடுகின்ற மயில் வாகனம், கூர்மையான வேல், கம்பீரமான செஞ்சேவல் ஆகியவற்றை",
+        meaningEn: "The dancing peacock mount, the sharp Vel (spear), and the handsome rooster banner —"
+      },
+      {
+        tamil: "பாடும் பணியே பணியாய் அருள்வாய்",
+        transliteration: "paadum paniye paniyaai arulvaai",
+        meaningTa: "மகிழ்ந்து பாடும் பக்திப் பணியையே அடியேன் செய்யும் சிறந்த வாழ்நாள் கடமையாகத் தந்தருள வேண்டும்.",
+        meaningEn: "grant that singing their praises evermore be my sole direct service and lifelong duty."
+      },
+      {
+        tamil: "... பாடும் அர மா முனிவர் சிகாமணியே",
+        transliteration: "... paadum ara maa munivar sigaamaniye",
+        meaningTa: "மாமுனிவர்களும் வேதங்கள் ஓதும் சிவனும் போற்றும் ஞானக் கிரீடமே, முருகனே!",
+        meaningEn: "O crest-gem of the sages and of Shiva who chants the core mystical code!"
+      }
+    ],
+    totalMeaningTa: "முருகவேளின் மயில், வேல், மற்றும் சேவல் ஆகியவற்றை நெஞ்சாரப் பாடுவதே என் உன்னதக் கடமையாக வேண்டும் என்று சரணாகதி புரிகிறோம்.",
+    totalMeaningEn: "By loving Skanda's spear, peacock, and rooster, we align our minds with pure cosmic elements. We beg the Lord of sages to make this praise our ultimate lifelong duty."
+  },
+  {
+    id: "anubhuti-12",
+    category: "anuboothi",
+    titleTa: "சும்மா இரு சொல் அற (கந்தர் அனுபூதி 12)",
+    titleEn: "Summa Iru Sol Ara (Kandar Anubhuti 12)",
+    location: "Swamimalai / Realization",
+    santham: "அனுபூதி மௌன நிலை (Silent Realization)",
+    introductionTa: "மெளன நிலை எனப்படும் ‘சும்மா இருத்தல்’ என்ற உன்னத ஆன்மீக உபதேசத்தை விளக்கும் கந்தர் அனுபூதியின் மிக முக்கிய ஞானச் செய்யுள்.",
+    introductionEn: "The pinnacle of Arunagirinathar's silence instruction: 'Summa Iru, Sol Ara' (Be still, bypass all thoughts). It describes the non-dual path of pure consciousness.",
+    youtubeId: "V_9bE6AFr8s",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/anubhuti_u.html",
+    lines: [
+      {
+        tamil: "செம்மான் மகளைத் திருடும் திருடன்",
+        transliteration: "semmaan magalaith thirudum thirudan",
+        meaningTa: "வள்ளிவேட குலத்து மான்மகளாகிய வள்ளியம்மையின் மனதைத் திருடிச் சென்ற கள்வனும்,",
+        meaningEn: "The divine thief who stole the lovely daughter of the red deer, Valli,"
+      },
+      {
+        tamil: "பெம்மான் முருகன் பிறவா நெறியை",
+        transliteration: "pemmaan murugan piravaa neriyai",
+        meaningTa: "எம் தலைவனான முருகக் கடவுளும் ஆகிய அவன் எனக்குப் பிறப்பு-இறப்பற்ற உன்னத நெறியை",
+        meaningEn: "our Lord Murugan, taught the path of non-birth (liberation/moksha) of supreme stillness,"
+      },
+      {
+        tamil: "சும்மா இரு சொல் அற என்றலுமே",
+        transliteration: "summaa iru sol ara endralumae",
+        meaningTa: "‘ஒன்றும் செய்யாமல் சும்மா இரு, சொற்களைக் கடந்து மௌனமாக இரு’ என்று உபதேசித்த மாத்திரத்தில்,",
+        meaningEn: "by commanding 'Be absolutely still; let all words dissolve into silence',"
+      },
+      {
+        tamil: "அம்மா பொருள் ஒன்றும் அறிந்திலனே",
+        transliteration: "ammaa porul ondrum arindhilanae",
+        meaningTa: "ஆச்சரியம்! அந்தப் பேரமைதிக்கு அப்பால் வேறொரு உலகப் பொருளையும் நான் அறியாதவனானேன்!",
+        meaningEn: "O marvel! I knew no other objective or reality beside that supreme unmoving peace."
+      }
+    ],
+    totalMeaningTa: "முருகப் பெருமான் ‘சும்மா இரு, சொல் அற’ என்று உரைத்த உடன் எல்லா உலகியல் ஆசைகளும் மனத்தடைகளும் அகன்று பேரின்ப நிலை கைவந்தது என்பது இப்பாடலின் சாரமாகும்.",
+    totalMeaningEn: "When the supreme intelligence of Lord Skanda instructed the mind to remain perfectly still without conceptual speech, all self-limiting loops collapsed into infinite cosmic peace."
+  },
+  {
+    id: "anubhuti-37",
+    category: "anuboothi",
+    titleTa: "உруவாய் அருவாய் (கந்தர் அனுபூதி 37)",
+    titleEn: "Uruvaai Aruvaai (Kandar Anubhuti 37)",
+    location: "Common",
+    santham: "இருமை கடந்த நிலை (Acosmic Unity)",
+    introductionTa: "முருகனை உருவமாகவும், அருவமாகவும், உலகத்தின் சகல ஜீவராசிகளாகவும், அவற்றை இயக்கும் பிரபஞ்ச சக்தியாகவும் போற்றும் பாடல்.",
+    introductionEn: "A core philosophical mantra celebrating Murugan as simultaneously form, formless, immanent, transcendent, scent, light, fate, and the Supreme Guru.",
+    youtubeId: "V_9bE6AFr8s",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/anubhuti_u.html",
+    lines: [
+      {
+        tamil: "உருவாய் அருவாய் உளதாய் இலதாய்",
+        transliteration: "uruvaai aruvaai uladhaai iladhaai",
+        meaningTa: "உருவம் உடையவனாகவும், உருவற்ற அருவமாகவும், பிரபஞ்சத்தில் நிறைந்துள்ளதாகவும், இல்லாததாகவும்,",
+        meaningEn: "Manifest with form, unmanifest without form, as existence itself and as void none,"
+      },
+      {
+        tamil: "மருவாய் மலராய் மணியாய் ஒளியாய்க்",
+        transliteration: "maruvaai malaraai maniyaai oliyaaik",
+        meaningTa: "வாசனை மிகுந்த நறுமணமாகவும், பூவாகவும், நவரத்தினமாகவும், அதன் பேரொளியாகவும்,",
+        meaningEn: "as the fragrance and the flower, as the shining gem and its glorious light,"
+      },
+      {
+        tamil: "கருவாய் உயிராய்க் கதியாய் விதியாய்க்",
+        transliteration: "karuvaai uyiraaik kadiyaai vidhiyaaik",
+        meaningTa: "பிறவிகளின் வித்தாய்க் கருவாகவும், அதன் உயிராகவும், அடையும் மோட்சப் புகலிடமாகவும், நடத்தும் விதியாகவும்,",
+        meaningEn: "as the embryonic source, the living breath, the final refuge, and the operational destiny,"
+      },
+      {
+        tamil: "குருவாய் வருவாய் அருள்வாய் குகனே",
+        transliteration: "guruvaai varuvaai arulvaai gugane",
+        meaningTa: "எனக்கு மெய்ஞ்ஞான குருவாக எழுந்தருளி வந்து இன்னருள் புரிவாயாக குகனே!",
+        meaningEn: "appear before me as the ultimate Satguru and bestow Your supreme grace, O Guha!"
+      }
+    ],
+    totalMeaningTa: "முருகன் ஒரு தத்துவ வடிவம். அவன் உருவமாய், அருவமாய், உயிருக்கு உயிராய், விதியாய், கதியாய் விளங்குபவன். அவரிடம் மெய்ஞ்ஞானக் குருவாக வந்து ஆட்கொள்ள வேண்டுகிறோம்.",
+    totalMeaningEn: "We recognize Lord Guha as the all-pervasive conscious energy of the cosmos: acting as the physical structure, spiritual scent, inner spirit of living beings, destiny, and the personal guide."
+  },
+  {
+    id: "alangaram-1",
+    category: "alangaram",
+    titleTa: "ஆதரித் துன்னை (கந்தர் அலங்காரம் 1)",
+    titleEn: "Adharith Unnai (Kandar Alangaram 1)",
+    location: "Common / Praise",
+    santham: "கட்டளைக் கலித்துறை (Kattalai Kalithurai)",
+    introductionTa: "முருகனின் பேரழகையும் கருணையையும் வர்ணிக்கும் கந்தர் அலங்காரத்தின் முதல் செய்யுளான காப்புச் செய்யுள்.",
+    introductionEn: "The opening verse of Kandar Alangaram, written by Saint Arunagirinathar to describe the supreme visual beauty and shelter of Lord Murugan's holy Spear.",
+    youtubeId: "b8y1t6dWeuY",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/alangaram_u.html",
+    lines: [
+      {
+        tamil: "ஆதரித் துன்னை யெந் நாளு மகத்துளென் னன்பினோடுஞ்",
+        transliteration: "aadharith unnai yen naalu magatthulen nanbinodum",
+        meaningTa: "எல்லா நாட்களிலும் என் மனத்தில் அன்போடு உன்னைத் துதித்து வழிபடும் என்",
+        meaningEn: "Worshipping You with absolute love in my heart on all days,"
+      },
+      {
+        tamil: "சாதரிப் பாருந் தவசீலருஞ் சதுரான நமுந்",
+        transliteration: "saadharip paarun thavaseelarun sadhuraana namum",
+        meaningTa: "மெய்யன்பர்களும், ஒழுக்கம் மிக்க தவசீலர்களும், நான்கு முகங்களை உடைய பிரம்மனும்,",
+        meaningEn: "and devout seekers, noble sages of great austerity, and the four-faced Creator Brahma,"
+      },
+      {
+        tamil: "போதரிப் பாருந் திகைப்பவந் தேகப் பொருப்பிலிட்ட",
+        transliteration: "podharip paarun thigaippavandh egap poruppilitta",
+        meaningTa: "திருமாலும் வியக்கும்படி வந்து, ஒப்பற்ற கிரௌஞ்ச மலையில் செலுத்திய,",
+        meaningEn: "and Lord Vishnu who sleeps on the sea-flower (banyan) wonders, throwing upon the solitary Krauncha mountain,"
+      },
+      {
+        tamil: "கோதரிப் பாரைக் கடந்தஅவ் வேல்நம் துணையுளதே",
+        transliteration: "kodharip paaraik kadandha-av velnam thunaiyuladhae",
+        meaningTa: "பகைவர்களை அழித்து வென்ற அந்த உன்னதமான வடிவேல் நமக்கு என்றும் துணையாக இருக்கிறது.",
+        meaningEn: "that sharp, divine Vel which vanquished all dark forces stands as our eternal guardian."
+      }
+    ],
+    totalMeaningTa: "மனத்தில் உன்னை எப்போதும் அன்புடனும் ஆதரவுடனும் தியானிக்கும் அடியார்களுக்கும், தவசீலர்களுக்கும், பிரம்மன் மற்றும் திருமால் ஆகியோரும் வியக்கும் வண்ணம், கிரௌஞ்ச மலையைப் பிளந்து பகைவர்களை அழித்த முருகவேளின் கூரிய வடிவேல் என்றும் நமக்குத் துணையாக இருக்கும்.",
+    totalMeaningEn: "For those who worship Lord Murugan with deep love in their hearts, as well as for austere sages, the majestic Vel of Lord Murugan, which pierced the Krauncha mountain in a way that amazed even Brahma and Vishnu, will remain a constant protector and guide."
   },
   {
     id: "nada-vindhu",
+    category: "thiruppugazh",
     titleTa: "நாதவிந்துகலாதீத நமோநம",
     titleEn: "Nada Vindhu Kaladhidha (Salutations to the Supreme)",
     location: "Pothu (General)",
@@ -279,6 +439,7 @@ export const SONGS_DATA: Song[] = [
   },
   {
     id: "sinathavar-mudikkum",
+    category: "thiruppugazh",
     titleTa: "சினத்தவர் முடிக்குமினமே (திருச்செந்தூர்)",
     titleEn: "Sinathavar Mudikkum (Anger Transcendence)",
     location: "Tiruchendur",
@@ -317,46 +478,208 @@ export const SONGS_DATA: Song[] = [
     totalMeaningEn: "Praising Murugan, the majestic son of Shiva and master of the sacred chants, drives away physical anger, establishing spiritual calm and clear insight."
   },
   {
-    id: "anubhuti-1",
-    titleTa: "நெஞ்சக் கனகல்லுருக (கந்தர் அனுபூதி)",
-    titleEn: "Nenjak Kanakalluruga (Kandar Anubhuti intro)",
-    location: "Common / Invocational",
+    id: "anubhuti-42",
+    category: "anuboothi",
+    titleTa: "விழிக்குத் துணைதிரு மென்மலர்ப் பாதங்கள் (கந்தர் அனுபூதி 42)",
+    titleEn: "Vilikku Thunaithiru (Divine Feet for Guidance)",
+    location: "Common / Non-Dual",
     santham: "சந்தம் - கலித்துறை (Santham - Kalithurai)",
-    introductionTa: "அருணகிரிநாதர் அருளிய 'கந்தர் அனுபூதி' என்னும் தவ நூலின் முதல் பாடல். இது கல் நெஞ்சையும் உருக வைத்து முருகனின் திருவடியில் சேர்க்கும்.",
-    introductionEn: "The opening invocatory hymn of Kandar Anubhuti, the ultimate treatise on self-realization, structured to melt rigid minds into pure devotion.",
-    youtubeId: "V_9bE6AFr8s",
+    introductionTa: "முருகப் பெருமானின் திருவடிகள் மற்றும் திருநாமமே நமக்கு எந்நாளும் எவ்விடத்திலும் அரணாக நின்று காக்கும் என்ற பரம சத்தியத்தைப் போற்றும் பாடல்.",
+    introductionEn: "A magnificent verse about how Lord Murugan's tender feet, His Spear, and Peacock serve as perpetual shields of protection and guidance for our senses.",
+    youtubeId: "WnS9f9Yx7Lg",
     kaumaramUrl: "https://www.kaumaram.com/thiru/anubhuti_u.html",
     lines: [
       {
-        tamil: "நெஞ்சக் கனகல்லுருக நெக்கு நெக்குற்று",
-        transliteration: "nenjak kanagalluruga nekku nekkutru",
-        meaningTa: "இரும்பு போலவும் கல் போலவும் கடினமாக இருக்கும் என்னுள் இருக்கும் நெஞ்சம் உருகவும்,",
-        meaningEn: "So that my hard, stone-like heart melts and overflows with soft tenderness,"
+        tamil: "விழிக்குத் துணைதிரு மென்மலர்ப் பாதங்கள் மெய்ம்மை குன்றா",
+        transliteration: "vilikkut thunaithiru menmalarp paadhangal meimmai kundraa",
+        meaningTa: "என் கண்களுக்குத் துணையாக முருகனின் மெல்லிய தாமரை போன்ற திருவடிகள் விளங்குகின்றன;",
+        meaningEn: "The true, ultimate protection and light for my eyes are the mild, flower-like feet;"
       },
       {
-        tamil: "அஞ்சக் கனிவாய் உருகும் அன்பு பெறவே",
-        transliteration: "anjak kanivaai urugum anbu peravae",
-        meaningTa: "பயங்கள் நீங்கி, கனிந்த உள்ளத்தோடு கண்ணீர் மல்கும் மெய்யன்பைப் பெற்றிடவும்,",
-        meaningEn: "and fears disappear while obtaining the sweet, weeping tears of intense love,"
+        tamil: "மொழிக்குத் துணைவிழி மும்மத வாரணத் தின்முளையாய்",
+        transliteration: "molikkut thunai-vili mummadha vaaranath thin-mulaiyaai",
+        meaningTa: "என் சொல்லுக்குத் துணையாக, மும்மதங்களை உடைய விநாயகரின் இளைய தம்பியான குகனின் நாமங்கள் உள்ளன;",
+        meaningEn: "the absolute companion for my speech is the names of younger brother of Ganesha;"
       },
       {
-        tamil: "நஞ்சக் கறைக்கண்டன் நவில்கரி மாமுகன்",
-        transliteration: "nanjak karaikkandan navilgari maamugan",
-        meaningTa: "நஞ்சை விழுங்கிய கறையணிந்த கண்டத்தையுடைய சிவபெருமானின் மூத்த மகனான கணபதிப் பெருமான்",
-        meaningEn: "the beloved elder brother of Murugan, the majestic elephant-headed Ganapati who serves Father Shiva,"
+        tamil: "வழிக்குத் துணைவடி வேலுஞ்செஞ் சேவலும் வாரணமுங்",
+        transliteration: "valikkut thunaivadivelunjenj sevalum vaaranamong",
+        meaningTa: "நான் செல்லும் நல்வழிக்குத் துணையாக அவனது கூரிய வேலும், கொடிச் சேவலும், மயில் வாகனமும் உள்ளன;",
+        meaningEn: "the shield of protection for my life path are His sharp Vel, Rooster banner, and Peacock;"
       },
       {
-        tamil: "பஞ்சக் கர ஆனைப் பதம் பணிவாமே",
-        transliteration: "panjak kara aanaip padham panivaamae",
-        meaningTa: "ஐந்து கரங்களை உடைய அந்த விநாயகப் பெருமானின் திருவடிகளைப் பணிவோம்.",
-        meaningEn: "before we proceed, we bow down and worship His five-handed lotus feet!"
+        tamil: "கழிக்குத் துணையென் றிருநாளுஞ் சிந்திப்பக் கடவதுவே",
+        transliteration: "kalikkut thunaiyen drirunaalun jinthippag kadavadhuvae",
+        meaningTa: "இவை அனைத்துமே என் துன்பங்களைப் போக்கும் துணையாகும் என்று எந்நாளும் நாம் தியானிக்கக் கடவோம்.",
+        meaningEn: "meditating upon these as our perpetual guides clears away every trace of grief daily."
       }
     ],
-    totalMeaningTa: "முருகனைப் பாடுவதற்கு முன்பாக, கல் நெஞ்சும் உருகும் அன்பைப் பெற்றிட, ஐந்து கரங்களையுடைய விநாயகரின் பொற்பாதங்களைத் தொழுகிறோம்.",
-    totalMeaningEn: "We praise Lord Ganapati first, so that our hardened egos melt into emotional spiritual awareness, qualifying us to receive the non-dual realization of Lord Skanda."
+    totalMeaningTa: "முருகனின் திருவடிகளும், முத்தமிழ் நாமங்களும், அவனது கூரிய வேலும், மயில் வாகனமும் எந்நாளும் நமக்குப் பின் துணையாக நின்று காக்கும் என்பது உறுதி.",
+    totalMeaningEn: "By loving Skanda's spear, peacock, and rooster, we align our minds with pure cosmic elements. We beg the Lord of sages to make this praise our ultimate lifelong duty."
+  },
+  {
+    id: "alangaram-107",
+    category: "alangaram",
+    titleTa: "சேந்தனைக் கந்தனைச் செங்கோட்டு (கந்தர் அலங்காரம் 107)",
+    titleEn: "Senthanai Kanthathai (Kandar Alangaram 107)",
+    location: "Thiruchengodu / Attributes",
+    santham: "சந்தம் - கலித்துறை (Santham - Kalithurai)",
+    introductionTa: "கந்தவேளின் உன்னதமான நாமங்களை நாவாரத் துதிப்போர்க்கு எம பயமும் பிறவித் துன்பமும் இல்லை என்ற விதியை நிலைநாட்டும் பாடல்.",
+    introductionEn: "The final masterpiece of Alangaram, describing how holding Skanda's names in our thoughts wards off the fear of death (Yama) and clears karmic chains.",
+    youtubeId: "vB-p-R36_Y0",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/alangaram_u.html",
+    lines: [
+      {
+        tamil: "சேந்தனைக் கந்தனைச் செங்கோட்டு வெற்பனைச் செஞ்சுடரார்",
+        transliteration: "senthandhang kanthanhaich cengottu verpanaic cenjudaraar",
+        meaningTa: "செம்மையான கடவுளும், சிவக்குமரனும், திருச்செங்கோட்டு மலையினில் உறையும் குகனும்,",
+        meaningEn: "The pure Red Lord, Kumaran, who resides at the beautiful peak of Thiruchengodu,"
+      },
+      {
+        tamil: "வேந்தனைச் செந்தமிழ் நூல்விரித் தோனை விளங்குமயில்",
+        transliteration: "venthanaic centhamilz noolvirith thonai vilangumayil",
+        meaningTa: "தேவர்களின் மன்னனும், செந்தமிழின் மறைநூல்களை விரித்த உன்னத சற்குருவும்,",
+        meaningEn: "the King of celestials who unfolded the deepest truths of literature, riding the Peacock,"
+      },
+      {
+        tamil: "ஏந்தனைப் போற்றி யிரப்பவர்க் கேயிவ னென்னும்யமன்",
+        transliteration: "enthandhaip potri yirappavark keyiva nennum-yaman",
+        meaningTa: "அவனைப் போற்றித் துதிக்கும் அடியார்களுக்கு எமனாகிய காலன் என்பவன்",
+        meaningEn: "to those devotees who surrender beneath His shield, Yama (Lord of Death)"
+      },
+      {
+        tamil: "பாய்ந்தனைப் பார்க்கும் பவமறுப் பானைப்பணி நெஞ்சமே",
+        transliteration: "paandhanaip paarkkum pavamarup paanaip-pani nenjamae",
+        meaningTa: "தன் வாகனத்தின் மீது பாய்ந்து வருவதைக் கண்டு அஞ்சாமல் முக்தி தருவான்; நெஞ்சமே அவனைப் பணிவாயாக!",
+        meaningEn: "has no power to approach. He tears down all karmas; O mind, surrender to Him!"
+      }
+    ],
+    totalMeaningTa: "திருச்செங்கோட்டு வேந்தனான முருகனைப் போற்றித் துதிக்கும் பக்தர்களின் பாவங்களை அறுத்து எம பயத்தை நீக்குவான். எனவே அவனை நாவாரப் போற்றி வணங்குவோம்.",
+    totalMeaningEn: "Surrendering of the intellect to Lord Murugan of Thiruchengodu dissolves the dark fear of death. Yama himself trembles to approach those who hold the Spear's flame in their hearts."
+  },
+  {
+    id: "viruththam-vel",
+    category: "viruththam",
+    titleTa: "வேல் விருத்தம் (முருகனின் சக்திவேல் துதி)",
+    titleEn: "Vel Viruththam (In Honor of the Sacred Spear)",
+    location: "Sacred Spear",
+    santham: "விருத்தச் சந்தம் (Viruttham)",
+    introductionTa: "முருகனின் திருக்கரத்தில் விளங்கும் கூரிய கதிர்வேலின் அற்புதப் பெருமைகளைப் போற்றி வணங்கும் பாடல்.",
+    introductionEn: "A high-vibrational verse celebrating the cosmic power and protective aura of Lord Skanda's Spear (Vel) that cuts through all mental illusions.",
+    youtubeId: "D8eGj892y_s",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/vel_u.html",
+    lines: [
+      {
+        tamil: "நெற்றியில்கண் நெருப்பிலெழுந்த குமரன்கை வேல் போற்றி",
+        transliteration: "netriyilkan neruppilelhundha kumarankai vel potri",
+        meaningTa: "பரமசிவனின் நெற்றிக்கண் அக்னியில் இருந்து அவதரித்த ஆறுமுகக் கடவுளின் திருக்கரத்தில் விளங்கும் வடிவேல் போற்றி!",
+        meaningEn: "We adore the brilliant, sacred Spear held in the hands of Kumaran who arose from the third-eye flame!"
+      },
+      {
+        tamil: "சுடரொளியால் கிரௌஞ்சகிரி பிளந்த கதிர்வேல் போற்றி",
+        transliteration: "sudaroliyaal kraunjagiri pilandha kadhirvel potri",
+        meaningTa: "தன் ஒப்பற்ற கதிரொளியால் அறியாமை மலையாகிய கிரௌஞ்ச மலையை நொடியில் பிளந்த கதிர்வேல் போற்றி!",
+        meaningEn: "We praise the radiant Lance that shattered the mighty mountain of Krauncha with its immense power!"
+      },
+      {
+        tamil: "அடியாரது அகத்துஇருளை அகற்றி நின்ற அற்புதவேல் போற்றி",
+        transliteration: "adiyaaradhhu ahathuirulai agatri nindra arputhavel potri",
+        meaningTa: "அன்பர்களின் நெஞ்சத்தில் இருக்கும் அறியாமை இருளை ஓட்டி ஞானப் பெருவெளியைத் தரும் அற்புதவேல் போற்றி!",
+        meaningEn: "We bow to the magnificent Spear that dispels the darkness of ignorance in the hearts of devotees!"
+      },
+      {
+        tamil: "வினையாவுமறுத்து மெய்யுணர்வுதரும் வெற்றிவேல் போற்றி",
+        transliteration: "vinaiyaavumaruthu meyyunharvudharum vetrivel potri",
+        meaningTa: "நம் வல்வினைகள் அனைத்தையும் அறுத்தெறிந்து பேரின்ப மெய்யுணர்வினைத் தரும் சுடர்வேல் போற்றி!",
+        meaningEn: "We salute the victorious Spear that cuts down all bad karmas and triggers supreme realization!"
+      }
+    ],
+    totalMeaningTa: "முருகனின் சக்தி வாய்ந்த திருவேல் நம் சிந்தையின் தீமைகளை, அச்சங்களை, கவலைகளை வேரறுத்து மெய்ஞ்ஞான ஒளியினைப் பாய்ச்சும் முருகனின் சக்திவேலே போற்றி.",
+    totalMeaningEn: "The sacred Vel held by the younger brother of Ganesha serves as the direct sword of wisdom to dissolve ego, anxiety, and ancestral bondages."
+  },
+  {
+    id: "viruththam-mayil",
+    category: "viruththam",
+    titleTa: "மயில் விருத்தம் (முருகனின் இந்திர மயில் துதி)",
+    titleEn: "Mayil Viruththam (In Honor of the Cosmic Peacock)",
+    location: "Peacock Vahana",
+    santham: "விருத்தச் சந்தம் (Viruttham)",
+    introductionTa: "ஆறுமுகனின் கம்பீரமான இந்திர மயில் வாகனத்தைப் போற்றி வணங்கும் தெய்வீகப் பாடல்.",
+    introductionEn: "An intense, high-vibration hymn in praises of the cosmic peacock mount representing the master of absolute time, speed, and spatial directions.",
+    youtubeId: "gBpt876m7cI",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/mayil_u.html",
+    lines: [
+      {
+        tamil: "விண்பறை மேல்விளங்கும் இந்திரன் மயில் போற்றி",
+        transliteration: "vinbarai melvilangum indhiran mayil potri",
+        meaningTa: "விண்ணுலகில் விளங்கும் தேவமயிலான இந்திரனின் வடிவாகத் திகழும அற்புத மயில் வாகனமே போற்றி!",
+        meaningEn: "We salute the cosmic peacock which glides over the stellar celestial heavens,"
+      },
+      {
+        tamil: "கண்பொறி ஆறு படைத்த சுப்பிரமணியன் ஏறும் மயில் போற்றி",
+        transliteration: "kanpori aaru padaittha subramaniyan erum mayil potri",
+        meaningTa: "நெருப்புப் பொறிகள் ஆறினில் இருந்து அவதரித்த சுப்பிரமணியப் பெருமான் உகந்து ஏறிவரும் மயில் போற்றி!",
+        meaningEn: "the magnificent mount ridden by Lord Subramanya, who arose from the six divine sparks!"
+      },
+      {
+        tamil: "மண்குளிர மழைபொழியும் காரவண்ண தோகை மயில்",
+        transliteration: "mankulira malaipoliyum kaaravanna thogai mayil",
+        meaningTa: "இந்த வையகம் குளிரும்படி கருணை மழையைப் பொழியும் மேக வண்ணம் கொண்ட விரிந்த தோகை மயில்,",
+        meaningEn: "The open forest-colored tail feathers which attract showers of grace to cool the parched earth,"
+      },
+      {
+        tamil: "விண்கடந்து பறந்துசென்று வினைகளைத் தீர்க்கும் மயில் போற்றி",
+        transliteration: "vinkadandhu parandhusendru vinaigalaith theerkkum mayil potri",
+        meaningTa: "விண்வெளிகளைக் கடந்து நொடியில் பறந்து வந்து அடியார்களின் வினைகளைத் தீர்க்கும் மயில் போற்றி!",
+        meaningEn: "We salute the cosmic bird which flies beyond boundaries to destroy our deepest karmas!"
+      }
+    ],
+    totalMeaningTa: "ஆறுமுகக் கடவுளின் தெய்வீக வாகனமாகிய மயில், அடியார்களின் வேண்டுதலை ஏற்று நொடிப் பொழுதில் பறந்துவந்து வல்வினைகளைத் தீர்க்கும்.",
+    totalMeaningEn: "The sacred peacock carries Lord Skanda across space in a fraction of an instant, sweeping away negative energies and external blockages with its cosmic plumage."
+  },
+  {
+    id: "viruththam-seval",
+    category: "viruththam",
+    titleTa: "சேவல் விருத்தம் (வெற்றிச் சேவலின் துதி)",
+    titleEn: "Seval Viruththam (In Honor of the Victorious Rooster)",
+    location: "Rooster Banner",
+    santham: "விருத்தச் சந்தம் (Viruttham)",
+    introductionTa: "அருணகிரிநாதர் பாடிய சேவல் விருத்தப் பாடல்களில் ஒன்று. அறியாமைத் தூக்கத்தைக் கலைத்து அருள் விடியலை அறிவிக்கும் சேவல்.",
+    introductionEn: "The rooster flag held proudly by Lord Murugan signals the dawn of absolute divine consciousness and wakes seekers from the slumber of ignorance.",
+    youtubeId: "W98pW2mK-D8",
+    kaumaramUrl: "https://www.kaumaram.com/thiru/seval_u.html",
+    lines: [
+      {
+        tamil: "மறைகளான நான்கு வேதங்களையும் கூவி உலகிற்கு அறிவிக்கும் சேவல்",
+        transliteration: "maraigalaana naangu vedhangalaiyum koovi ulagirku arivikkum seval",
+        meaningTa: "தங்கள் கம்பீரமான கூவலினால் நான்கு வேதங்களின் உண்மைப் பொருளையும் உலகிற்குப் பறைசாற்றும் சேவல்,",
+        meaningEn: "The holy rooster whose bold clarion cry proclaims the light of the four Vedas to the universe,"
+      },
+      {
+        tamil: "சூரபத்மன் உடலினின்றும் பிரித்தெடுத்த செஞ்சேவல்",
+        transliteration: "soorabadhman udalinindrum pirittheduttha senjeval",
+        meaningTa: "சூரபத்மன் உடலைப் பிளந்த போது அதில் ஒரு பாதியாகத் தோன்றி முருகனின் கொடியாக நின்ற செஞ்சேவல்,",
+        meaningEn: "the crimson bird which arose from the split body of Sooran to adorn Murugan's standard banner,"
+      },
+      {
+        tamil: "விடியல் ஒளியினைத் தொடங்கி அறியாமைத் தூக்கம் கலைக்கும் சேவல்",
+        transliteration: "vidiyal oliyinaith thodangi ariyaamaith thookkam kalaikkum seval",
+        meaningTa: "ஞான விடியலின் பிறப்பினை அறிவித்து மனிதர்களின் அறியாமை என்னும் அஞ்ஞானத் தூக்கம் கலைக்கும் சேவல்,",
+        meaningEn: "herald of the bright golden dawn, waking up human minds from the night of deep maya,"
+      },
+      {
+        tamil: "குகனது வெற்றிக் கொடியாகப் பறக்கும் சேவலே போற்றி",
+        transliteration: "gugandhu vetrik kodiyaagap parakkum sevale potri",
+        meaningTa: "குகக் கடவுளின் வெற்றியின் உன்னதச் சின்னமாகப் பறந்திடும் கொடிச் சேவலே போற்றி!",
+        meaningEn: "We praise and surrender to the sacred rooster flying high as the banner of victory!"
+      }
+    ],
+    totalMeaningTa: "முருகனின் வெற்றிக் கொடியாக விளங்கும் சேவல், மனித குலத்திற்கு ஞான விடியலைத் தந்து அறியாமை என்னும் இருளை நீக்கி முக்திப் பேற்றிற்கு வழிகாட்டும்.",
+    totalMeaningEn: "The red rooster on Lord Murugan's flag represents the dynamic awakening of spiritual wisdom, calling seekers to rise and accept the dawn of Skanda's love."
   },
   {
     id: "anchal-endru",
+    category: "thiruppugazh",
     titleTa: "அஞ்சலஞ்சலென்றுகை கொடுக்குமப்பா (சுவாமிமலை)",
     titleEn: "Anchal Anchal Endru (Fear Not - Swamimalai)",
     location: "Swamimalai",

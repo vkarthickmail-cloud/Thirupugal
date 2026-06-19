@@ -1,6 +1,6 @@
 {
-  "name": "Thiruppugazh Explanations",
-  "description": "Explores the rhythmic Thiruppugazh hymns with line-by-line meanings in Tamil and English, text-to-speech, divine image generators, and an AI chat guide.",
+  "name": "Siva-Skanda Sudha",
+  "description": "Explores the rhythmic Thiruppugazh hymns of Lord Murugan and the 12 Holy Panniru Tirumurai books of Lord Shiva, featuring Tamil-English translations, sound recitals, visual arts, and an AI scholar.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

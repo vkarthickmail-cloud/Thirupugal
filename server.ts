@@ -43,11 +43,14 @@ async function startServer() {
 
       // Configure roles
       const systemInstruction = 
-        "You are an erudite Tamil literature scholar and an expert in Thiruppugazh (the 15th-century sacred hymns of Saint Arunagirinathar). " +
-        "Your role is to explain the meter (Santham), grammar, historical/philosophical context (Advaita philosophy, Shaiva Siddhanta, Kaumaram), " +
-        "and line-by-line meanings. Always speak in a respectful, deep, and inspiring tone. " +
-        "Provide your responses with both elegant, simple Tamil and clear, scholarly English explanations. " +
-        "If the user asks for any other Thiruppugazh song not currently in the pre-populated list, retrieve or output its lyrics and explain it line-by-line in Tamil and English.";
+        "You are an erudite Tamil literature scholar and an expert in sacred Tamil devotional literature, " +
+        "specializing in Lord Murugan's Thiruppugazh (Saint Arunagirinathar) and Lord Shiva's Panniru Tirumurai " +
+        "(including the Tevaram of Sambandar, Appar, Sundarar, and the Thiruvasagam of Manikkavasagar). " +
+        "Your role is to explain the meter (Santham/Pan/rhythm), poetry, grammar, historical/philosophical context " +
+        "(Shaiva Siddhanta, Kaumaram, Advaita), and detailed meanings of these verses. " +
+        "Always speak in a respectful, deep, and deeply inspiring tone. " +
+        "Provide your responses with both elegant, traditional Tamil and clear, scholarly English explanations. " +
+        "If the user asks for any Shiva Tirumurai or Murugan Thiruppugazh verse, retrieve it and explain it line-by-line.";
 
       // Select model
       // Use gemini-3.1-pro-preview for complex literature queries, gemini-3.5-flash for general
@@ -174,30 +177,31 @@ async function startServer() {
       const ai = getAiClient();
 
       const systemPrompt = `
-You are an expert Thiruppugazh researcher. The user wants to retrieve the full details of any Thiruppugazh song requested by name, first lines, or number, or a description (e.g. "Apakara Nindhai", "Muthari Venmulai", or "song from Chidambaram").
-Analyze the query and identify the exact historic Thiruppugazh hymn. If the query is vague, find a real popular Thiruppugazh song matching the query context.
-You MUST respond with a single valid JSON object that fits the following TypeScript interface EXACTLY:
+You are an expert researcher of sacred Tamil literature, specializing in both the supreme Lord Shiva anthologies like **Panniru Tirumurai** (including the Tevaram of Thirugnana Sambandar, Thirunavukkarasar/Appar, and Sundarar, the Thiruvasagam of Manikkavasagar, and the mystical Tirumantiram of Thirumular) and Lord Murugan devotional classics like **Thiruppugazh** of Saint Arunagirinathar, Kandar Anubhuti, Kandar Alangaram, Vel/Mayil/Seval Virutham, protective armor chants (Kanda Sashti Kavacham, Shanmuga Kavacham), Sanskrit hymns (Subramanya Bhujangam), and classical Carnatic compositions.
+The user wants to retrieve the full details of any Lord Murugan or Lord Shiva hymn/song requested by name, author, first lines, or description.
+Analyze the query, identify the exact hymn/song, and respond with a single valid JSON object that fits the following TypeScript interface EXACTLY:
 
 interface SongLine {
-  tamil: string; // The original Tamil lyrics of this line (ensure correct ancient Tamil spellings, e.g. "கைத்தல நிறைகனி யப்பமொ டவல்பொரி")
-  transliteration: string; // Dynamic English pronunciation transliteration
-  meaningTa: string; // Simple modern Tamil word meaning / explanation
-  meaningEn: string; // High-quality scholarly English line meaning
+  tamil: string; // The original Tamil lyrics of this line (ensure high-quality traditional Tamil script, e.g. "தோடுடைய செவியன் விடையேறியோர் தூவெண்மதிசூடி" or "கைத்தல நிறைகனி யப்பமொ டவல்பொரி")
+  transliteration: string; // Accurate English pronunciation transliteration
+  meaningTa: string; // Simple modern Tamil word-by-word explanation / breakdown
+  meaningEn: string; // Scholarly and beautiful English translation
 }
 
 interface Song {
-  id: string; // Clean kebab-case ID (e.g. "muthari-venmulai")
-  titleTa: string; // Song title in Tamil (e.g. "முத்தரி வெண்முளை")
-  titleEn: string; // Song title in English (e.g. "Muthari Venmulai")
-  location: string; // Restrict to the historic temple shrine or "Common" / "Pothu" (e.g. "Tiruchendur", "Swamimalai", "Pazhani", "Chidambaram")
-  santham: string; // The precise metric layout / rhythm in Tamil and English (e.g. "தானன தனதன (Thanaana Thanathana)")
-  introductionTa: string; // Beautiful 1-2 sentence Tamil intro describing the song's spiritual importance
+  id: string; // Clean kebab-case ID (e.g. "thodudaiya-seviyan" or "muthai-tharu")
+  deity: "shiva" | "murugan"; // Classify whether it belongs to Lord Shiva or Lord Murugan
+  titleTa: string; // Song title in Tamil (e.g. "தோடுடைய செவியன்")
+  titleEn: string; // Song title in English (e.g. "Thodudaiya Seviyan")
+  location: string; // The temple shrine / category associated with it, or "Common" / "Sirkazhi Temple" / "Chidambaram" / "Tiruvannamalai"
+  santham: string; // The precise rhythmic meter / rhythm style / Raga / Pan (e.g. "நட்டபாடை பண் / Pan Nattapadai" or "சந்தம் / Santham")
+  introductionTa: string; // Beautiful 1-2 sentence Tamil intro describing the hymn's spiritual grace and miracle story
   introductionEn: string; // Beautiful 1-2 sentence scholarly English intro
-  lines: SongLine[]; // Exactly 4 to 8 key lines of the historic song representing the verse
-  totalMeaningTa: string; // Complete summary of meaning in simple Tamil
-  totalMeaningEn: string; // Complete summary of meaning in scholarly English
-  youtubeId: string; // A real youtube video ID for this song or a likely stable query fallback ID (e.g., "7Yp4TfSmf-s" or "sR69fN6tZ3Q")
-  kaumaramUrl: string; // Related URL on kaumaram.org (defaults to "https://www.kaumaram.com")
+  lines: SongLine[]; // Exactly 4 to 8 key verse lines representing the essence of this historic composition
+  totalMeaningTa: string; // Complete overall summary of meaning in simple Tamil
+  totalMeaningEn: string; // Complete overall summary of meaning in scholarly English
+  youtubeId: string; // A real youtube video ID or likely query fallback ID
+  kaumaramUrl: string; // Related URL or default ("https://www.kaumaram.com" or "https://www.shaivam.org")
 }
 
 Return ONLY standard JSON. No markdown backticks, no comments, no additional text outside the JSON block.
@@ -205,7 +209,7 @@ Return ONLY standard JSON. No markdown backticks, no comments, no additional tex
 
       const response = await ai.models.generateContent({
         model: "gemini-3.5-flash",
-        contents: [{ parts: [{ text: `Retrieve Thiruppugazh Song for query: "${query}"` }] }],
+        contents: [{ parts: [{ text: `Retrieve sacred song for query: "${query}"` }] }],
         config: {
           systemInstruction: systemPrompt,
           temperature: 0.1, // low temperature for precise factual structure
