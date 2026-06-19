@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { SONGS_DATA } from "./songsData";
+import { CANONICAL_CATALOG, TEMPLE_CATEGORIES } from "./catalogData";
 import { Song, ChatMessage } from "./types";
 
 export default function App() {
@@ -68,6 +69,60 @@ export default function App() {
     setImgError(null);
   }, [selectedSong]);
 
+  // Infinite Archive Dynamic Retrieval States
+  const [activeSidebarTab, setActiveSidebarTab] = useState<"library" | "catalog">("library");
+  const [catalogSearchQuery, setCatalogSearchQuery] = useState("");
+  const [selectedTempleFilter, setSelectedTempleFilter] = useState("All Temples");
+  const [directNumberInput, setDirectNumberInput] = useState("");
+
+  const [customSearchQuery, setCustomSearchQuery] = useState("");
+  const [loadingCustom, setLoadingCustom] = useState(false);
+  const [customLoadError, setCustomLoadError] = useState<string | null>(null);
+  const [customLoadSuccess, setCustomLoadSuccess] = useState(false);
+
+  // Load custom song dynamically from the archives using Gemini
+  const loadCustomSong = async (queryText?: string) => {
+    const targetQuery = queryText || customSearchQuery;
+    if (!targetQuery.trim()) return;
+    setLoadingCustom(true);
+    setCustomLoadError(null);
+    setCustomLoadSuccess(false);
+
+    try {
+      const res = await fetch("/api/load-custom-song", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: targetQuery }),
+      });
+
+      const data = await res.json();
+      if (res.status !== 200 || data.error) {
+        throw new Error(data.error || "Could not retrieve this hymn from the central archives.");
+      }
+
+      // Check if song already exists in local list, update or append
+      const existsIdx = songs.findIndex((s) => s.id === data.id);
+      if (existsIdx > -1) {
+        const updatedSongs = [...songs];
+        updatedSongs[existsIdx] = data;
+        setSongs(updatedSongs);
+      } else {
+        setSongs((prev) => [...prev, data]);
+      }
+
+      setSelectedSong(data);
+      setCustomLoadSuccess(true);
+      if (!queryText) setCustomSearchQuery("");
+      
+      // Clear success state after 4 seconds
+      setTimeout(() => setCustomLoadSuccess(false), 4000);
+    } catch (err: any) {
+      setCustomLoadError(err.message || "An error occurred retrieving the requested hymn. Ensure GEMINI_API_KEY is configured.");
+    } finally {
+      setLoadingCustom(false);
+    }
+  };
+
   // Scroll chat to bottom on messages update
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -82,6 +137,23 @@ export default function App() {
       s.location.toLowerCase().includes(query) ||
       s.santham.toLowerCase().includes(query)
     );
+  });
+
+  // Filter the catalog items for the Infinite 1000+ Archive Index
+  const filteredCatalog = CANONICAL_CATALOG.filter((item) => {
+    const q = catalogSearchQuery.toLowerCase().trim();
+    const matchesTemple = 
+      selectedTempleFilter === "All Temples" ||
+      item.temple === selectedTempleFilter;
+    if (!q) return matchesTemple;
+    
+    const matchesQuery = 
+      item.titleEn.toLowerCase().includes(q) ||
+      item.titleTa.includes(q) ||
+      item.temple.toLowerCase().includes(q) ||
+      item.number.toString() === q;
+      
+    return matchesQuery && matchesTemple;
   });
 
   // Handle Text-to-Speech
@@ -311,65 +383,239 @@ export default function App() {
             
             {/* Song Lookup Directory */}
             <div className="bg-[#0a0a0c] rounded-xl p-5 shadow-sm border border-white/5">
-              <h3 className="font-serif text-white text-base mb-3 flex items-center gap-2">
-                <BookOpen className="h-5 w-5 text-[#c5a059]" />
-                <span className="text-[10px] uppercase tracking-[0.3em] text-[#c5a059] font-bold">Selection / தெரிவு</span>
+              <h3 className="font-serif text-white text-base mb-3 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <BookOpen className="h-5 w-5 text-[#c5a059]" />
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#c5a059] font-bold">DIRECTORY / திருப்புகழ் திரட்டு</span>
+                </div>
+                <span className="text-[10px] bg-white/5 text-gray-400 px-2 py-0.5 rounded font-mono font-bold">1,307 Songs</span>
               </h3>
-              
-              {/* Search Bar Input */}
-              <div className="relative mb-4">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-                <input 
-                  type="text" 
-                  placeholder="Query by title, locations, rhythm..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-[#16161a] border border-white/5 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#c5a059]/55 transition-all"
-                />
+
+              {/* Tab Selector */}
+              <div className="flex border-b border-white/5 mb-4 p-0.5 bg-[#16161a] rounded">
+                <button
+                  type="button"
+                  id="tab-selector-library"
+                  onClick={() => setActiveSidebarTab("library")}
+                  className={`flex-1 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded transition-all ${
+                    activeSidebarTab === "library"
+                      ? "bg-[#c5a059] text-[#0a0a0c]"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Interactive ({songs.length})
+                </button>
+                <button
+                  type="button"
+                  id="tab-selector-catalog"
+                  onClick={() => setActiveSidebarTab("catalog")}
+                  className={`flex-1 py-1.5 text-[10px] font-bold uppercase tracking-wider rounded transition-all ${
+                    activeSidebarTab === "catalog"
+                      ? "bg-[#c5a059] text-[#0a0a0c]"
+                      : "text-gray-400 hover:text-white"
+                  }`}
+                >
+                  Infinite 1000+ Index
+                </button>
               </div>
 
-              {/* Hymn lists */}
-              <div className="flex flex-col gap-2 max-h-[460px] overflow-y-auto pr-1">
-                {filteredSongs.length > 0 ? (
-                  filteredSongs.map((song) => {
-                    const isSelected = song.id === selectedSong.id;
-                    return (
-                      <button
-                        key={song.id}
-                        onClick={() => setSelectedSong(song)}
-                        className={`w-full text-left p-4 rounded transition-all flex flex-col gap-1.5 ${
-                          isSelected
-                            ? "bg-[#16161a] border-l-2 border-[#c5a059]"
-                            : "hover:bg-white/5 opacity-75 hover:opacity-100"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <span className={`text-sm font-serif ${isSelected ? "text-white" : "text-gray-300"}`}>
-                            {song.titleTa}
-                          </span>
-                          <ChevronRight className={`h-4 w-4 shrink-0 mt-0.5 ${isSelected ? "text-[#c5a059]" : "text-gray-600"}`} />
-                        </div>
-                        
-                        <span className={`text-xs ${isSelected ? "text-[#c5a059]" : "text-gray-500"} font-medium tracking-wide`}>
-                          {song.titleEn}
-                        </span>
-
-                        <div className="flex items-center gap-2 mt-1">
-                          <span className="inline-block px-1.5 py-0.5 text-[9px] font-semibold bg-white/5 text-gray-400 border border-white/5 rounded">
-                            {song.location}
-                          </span>
-                          <span className="text-[10px] text-gray-500 font-mono truncate max-w-[200px]" title={song.santham}>
-                            {song.santham}
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })
-                ) : (
-                  <div className="text-center py-8 px-4 text-gray-500">
-                    <p className="text-sm font-medium">No pre-populated hymns match your search.</p>
-                    <p className="text-xs text-gray-600 mt-1">You can ask our AI Scholar in the chat below to fetch and explain this song!</p>
+              {activeSidebarTab === "library" ? (
+                <>
+                  {/* Search Bar Input */}
+                  <div className="relative mb-4">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                    <input 
+                      type="text" 
+                      placeholder="Query by title, locations, rhythm..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-10 pr-4 py-2 bg-[#16161a] border border-white/5 rounded text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#c5a059]/55 transition-all"
+                    />
                   </div>
+
+                  {/* Hymn lists */}
+                  <div className="flex flex-col gap-2 max-h-[360px] overflow-y-auto pr-1">
+                    {filteredSongs.length > 0 ? (
+                      filteredSongs.map((song) => {
+                        const isSelected = song.id === selectedSong.id;
+                        return (
+                          <button
+                            key={song.id}
+                            id={`song-select-btn-${song.id}`}
+                            onClick={() => setSelectedSong(song)}
+                            className={`w-full text-left p-4 rounded transition-all flex flex-col gap-1.5 ${
+                              isSelected
+                                ? "bg-[#16161a] border-l-2 border-[#c5a059]"
+                                : "hover:bg-white/5 opacity-75 hover:opacity-100"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <span className={`text-sm font-serif ${isSelected ? "text-white" : "text-gray-300"}`}>
+                                {song.titleTa}
+                              </span>
+                              <ChevronRight className={`h-4 w-4 shrink-0 mt-0.5 ${isSelected ? "text-[#c5a059]" : "text-gray-600"}`} />
+                            </div>
+                            
+                            <span className={`text-xs ${isSelected ? "text-[#c5a059]" : "text-gray-500"} font-medium tracking-wide`}>
+                              {song.titleEn}
+                            </span>
+
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="inline-block px-1.5 py-0.5 text-[9px] font-semibold bg-white/5 text-gray-400 border border-white/5 rounded">
+                                {song.location}
+                              </span>
+                              <span className="text-[10px] text-gray-500 font-mono truncate max-w-[200px]" title={song.santham}>
+                                {song.santham}
+                              </span>
+                            </div>
+                          </button>
+                        );
+                      })
+                    ) : (
+                      <div className="text-center py-8 px-4 text-gray-500">
+                        <p className="text-sm font-medium">No pre-populated hymns match your search.</p>
+                        <p className="text-xs text-gray-600 mt-1">You can ask our AI Scholar in the chat below to fetch and explain this song!</p>
+                      </div>
+                    )}
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* Direct Dialer Block */}
+                  <div className="bg-[#121215] border border-white/5 rounded p-3 mb-4">
+                    <span className="text-[10px] uppercase font-bold text-[#c5a059] block mb-1">
+                      Canonical Dialer / திருப்புகழ் எண்
+                    </span>
+                    <p className="text-[10px] text-gray-500 mb-2 leading-tight">
+                      Instantly index or retrieve any of the 1,307 canonical songs by writing its number.
+                    </p>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        placeholder="Song number 1 to 1307 (e.g. 42)"
+                        value={directNumberInput}
+                        onChange={(e) => setDirectNumberInput(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            loadCustomSong(`Thiruppugazh Song #${directNumberInput.trim()}`);
+                            setDirectNumberInput("");
+                          }
+                        }}
+                        className="flex-1 min-w-0 px-2.5 py-1.5 bg-[#1a1a20] border border-white/5 rounded text-xs text-white focus:outline-none focus:border-[#c5a059]"
+                      />
+                      <button
+                        type="button"
+                        id="direct-dial-btn"
+                        onClick={() => {
+                          loadCustomSong(`Thiruppugazh Song #${directNumberInput.trim()}`);
+                          setDirectNumberInput("");
+                        }}
+                        disabled={loadingCustom || !directNumberInput.trim()}
+                        className="px-3 py-1.5 bg-[#c5a059] hover:bg-[#b08b49] disabled:opacity-40 text-[#0a0a0c] text-xs font-bold rounded transition-all shrink-0 flex items-center justify-center"
+                      >
+                        {loadingCustom ? <RefreshCw className="h-3 w-3 animate-spin" /> : "Dial"}
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Shrine select filter */}
+                  <div className="mb-3">
+                    <span className="text-[9px] uppercase font-bold text-[#c5a059] block mb-1">Filter by Temple Shrine</span>
+                    <select
+                      value={selectedTempleFilter}
+                      onChange={(e) => setSelectedTempleFilter(e.target.value)}
+                      className="w-full px-2 py-1.5 bg-[#16161a] border border-white/5 rounded text-gray-300 text-xs focus:outline-none focus:border-[#c5a059]"
+                    >
+                      {TEMPLE_CATEGORIES.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Catalog search input */}
+                  <div className="relative mb-3">
+                    <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-gray-500" />
+                    <input 
+                      type="text" 
+                      placeholder="Filter 1,000+ catalog titles..."
+                      value={catalogSearchQuery}
+                      onChange={(e) => setCatalogSearchQuery(e.target.value)}
+                      className="w-full pl-8 pr-3 py-1.5 bg-[#16161a] border border-white/5 rounded text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#c5a059]"
+                    />
+                  </div>
+
+                  {/* Catalog entries */}
+                  <div className="flex flex-col gap-1.5 max-h-[220px] overflow-y-auto pr-1">
+                    {filteredCatalog.length > 0 ? (
+                      filteredCatalog.map((item) => (
+                        <button
+                          key={item.number}
+                          id={`catalog-select-btn-${item.number}`}
+                          onClick={() => loadCustomSong(`Thiruppugazh Song #${item.number}: ${item.titleEn}`)}
+                          disabled={loadingCustom}
+                          className="w-full text-left p-2.5 rounded bg-[#121215]/50 border border-white/10 hover:border-[#c5a059]/40 hover:bg-white/5 transition-all text-xs flex flex-col gap-1 group disabled:opacity-60"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-mono font-bold text-[#c5a059]">Song #{item.number}</span>
+                            <span className="text-[9px] text-gray-400 font-semibold bg-white/5 px-1.5 py-0.5 rounded">
+                              {item.temple}
+                            </span>
+                          </div>
+                          <span className="font-serif text-white group-hover:text-[#c5a059] transition-all truncate">
+                            {item.titleTa}
+                          </span>
+                          <span className="text-[10px] text-gray-400 truncate font-light">
+                            {item.titleEn}
+                          </span>
+                        </button>
+                      ))
+                    ) : (
+                      <div className="text-center py-6 px-3 text-gray-600 text-[11px]">
+                        No matches found inside curated catalog. Try typing any custom name or number into the Dialer above!
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+
+              {/* Dynamic Song Load Section */}
+              <div className="mt-5 pt-4 border-t border-white/5">
+                <span className="text-[10px] uppercase tracking-[0.2em] text-[#c5a059] font-bold block mb-1">
+                  Custom AI Retrieval / அகிலத் திருப்புகழ் தேடல்
+                </span>
+                <p className="text-[11px] text-gray-500 mb-3 leading-normal">
+                  Unlock all 1,300+ songs. Type any title or lyric snippet (e.g. <em>"Muthari Venmulai"</em> or <em>"Saranadha Tharalayam"</em>) to pull and overlay its complete data in real-time!
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={customSearchQuery}
+                    onChange={(e) => setCustomSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") loadCustomSong();
+                    }}
+                    placeholder="e.g. Kaithala Nirai Kani"
+                    className="flex-1 min-w-0 px-3 py-1.5 bg-[#16161a] border border-white/5 rounded text-xs text-white placeholder-gray-500 focus:outline-none focus:border-[#c5a059]/55 transition-all h-8"
+                  />
+                  <button
+                    type="button"
+                    id="custom-search-load-btn"
+                    onClick={() => loadCustomSong()}
+                    disabled={loadingCustom || !customSearchQuery.trim()}
+                    className="h-8 px-3 py-1 bg-[#c5a059] hover:bg-[#b08b49] disabled:opacity-40 text-[#0a0a0c] text-xs font-bold rounded transition-all flex items-center gap-1 shrink-0"
+                  >
+                    {loadingCustom ? (
+                      <RefreshCw className="h-3 w-3 animate-spin" />
+                    ) : (
+                      "Load"
+                    )}
+                  </button>
+                </div>
+                {customLoadError && (
+                  <p className="text-[10px] text-red-400 mt-1.5 leading-normal">{customLoadError}</p>
+                )}
+                {customLoadSuccess && (
+                  <p className="text-[10px] text-emerald-400 mt-1.5 leading-normal font-semibold">Successfully loaded into selection list!</p>
                 )}
               </div>
             </div>

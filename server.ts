@@ -163,6 +163,72 @@ async function startServer() {
     res.json({ hasKey: !!process.env.GEMINI_API_KEY });
   });
 
+  // API 4: Dynamic Song Search & Loader (Provides access to ALL 1300+ Thiruppugazh songs via Gemini AI)
+  app.post("/api/load-custom-song", async (req, res) => {
+    try {
+      const { query } = req.body;
+      if (!query || !query.trim()) {
+        return res.status(400).json({ error: "Search query is required." });
+      }
+
+      const ai = getAiClient();
+
+      const systemPrompt = `
+You are an expert Thiruppugazh researcher. The user wants to retrieve the full details of any Thiruppugazh song requested by name, first lines, or number, or a description (e.g. "Apakara Nindhai", "Muthari Venmulai", or "song from Chidambaram").
+Analyze the query and identify the exact historic Thiruppugazh hymn. If the query is vague, find a real popular Thiruppugazh song matching the query context.
+You MUST respond with a single valid JSON object that fits the following TypeScript interface EXACTLY:
+
+interface SongLine {
+  tamil: string; // The original Tamil lyrics of this line (ensure correct ancient Tamil spellings, e.g. "கைத்தல நிறைகனி யப்பமொ டவல்பொரி")
+  transliteration: string; // Dynamic English pronunciation transliteration
+  meaningTa: string; // Simple modern Tamil word meaning / explanation
+  meaningEn: string; // High-quality scholarly English line meaning
+}
+
+interface Song {
+  id: string; // Clean kebab-case ID (e.g. "muthari-venmulai")
+  titleTa: string; // Song title in Tamil (e.g. "முத்தரி வெண்முளை")
+  titleEn: string; // Song title in English (e.g. "Muthari Venmulai")
+  location: string; // Restrict to the historic temple shrine or "Common" / "Pothu" (e.g. "Tiruchendur", "Swamimalai", "Pazhani", "Chidambaram")
+  santham: string; // The precise metric layout / rhythm in Tamil and English (e.g. "தானன தனதன (Thanaana Thanathana)")
+  introductionTa: string; // Beautiful 1-2 sentence Tamil intro describing the song's spiritual importance
+  introductionEn: string; // Beautiful 1-2 sentence scholarly English intro
+  lines: SongLine[]; // Exactly 4 to 8 key lines of the historic song representing the verse
+  totalMeaningTa: string; // Complete summary of meaning in simple Tamil
+  totalMeaningEn: string; // Complete summary of meaning in scholarly English
+  youtubeId: string; // A real youtube video ID for this song or a likely stable query fallback ID (e.g., "7Yp4TfSmf-s" or "sR69fN6tZ3Q")
+  kaumaramUrl: string; // Related URL on kaumaram.org (defaults to "https://www.kaumaram.com")
+}
+
+Return ONLY standard JSON. No markdown backticks, no comments, no additional text outside the JSON block.
+`;
+
+      const response = await ai.models.generateContent({
+        model: "gemini-3.5-flash",
+        contents: [{ parts: [{ text: `Retrieve Thiruppugazh Song for query: "${query}"` }] }],
+        config: {
+          systemInstruction: systemPrompt,
+          temperature: 0.1, // low temperature for precise factual structure
+          responseMimeType: "application/json",
+        },
+      });
+
+      const responseText = response.text || "";
+      const cleanJson = responseText.trim().replace(/^```json\s*/i, "").replace(/```$/, "").trim();
+      const songData = JSON.parse(cleanJson);
+      
+      // Basic runtime check
+      if (!songData.id || !songData.titleTa || !songData.lines) {
+        throw new Error("Retrieved structure was incomplete.");
+      }
+
+      res.json(songData);
+    } catch (error: any) {
+      console.error("Custom song load error:", error);
+      res.status(500).json({ error: error.message || "Failed to retrieve the requested Thiruppugazh from archives." });
+    }
+  });
+
   // Vite integration
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
